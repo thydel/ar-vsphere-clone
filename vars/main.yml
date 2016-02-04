@@ -1,0 +1,15 @@
+---
+
+vcenter:       "{{ vcenter_hostname }}"
+username:      "{{ vcenter_username }}"
+
+datacenter:    "{{ vcenter_datacenter }}"
+cluster:       "{{ vcenter_cluster }}"
+resource_pool: "{{ vcenter_resource_pool }}"
+
+esxi_host:     "{{ vcenter_create_on_host }}"
+
+vm_name:       "{{ inventory_hostname }}.{{ vcenter_fqdn }}"
+vm_hostname:   "{{ inventory_hostname }}"
+
+network_name:  "{{ Networks[admin_network].fqdn }}"

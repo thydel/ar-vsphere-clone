@@ -1,0 +1,14 @@
+---
+
+- assert: { that: vm_status == "POWERED ON" }
+
+- name: Wait for ssh to appears
+
+  when: boot_.changed
+  delegate_to: bastion
+
+  wait_for:
+    host: "{{ vm_hostname }}.{{ network_name }}"
+    port: 22
+    delay: 20
+    timeout: 30

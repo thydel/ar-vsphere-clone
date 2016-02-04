@@ -1,0 +1,8 @@
+---
+
+- name: Collect post boot facts
+
+  when: vm_status == 'POWERED ON'
+  always_run: True
+
+  setup:

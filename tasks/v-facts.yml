@@ -1,0 +1,18 @@
+---
+
+- name: Register VM facts
+
+  when: not clone_|skipped
+  register: vm_
+  always_run: True
+  delegate_to: pysphere
+
+  vsphere_guest:
+    vcenter_hostname: "{{ vcenter }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    guest: "{{ vm_name }}"
+    vmware_guest_facts: yes
+
+- debug: { var: vm_ }
+  when: debug is defined and not clone_|skipped

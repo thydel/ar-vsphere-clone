@@ -1,0 +1,23 @@
+---
+
+- name: Ansible apt module needs python-apt
+
+  args:
+    creates: /usr/share/doc/python-apt
+
+  command: apt-get install -y python-apt
+
+- name: Install ed
+  apt: { name: ed }
+
+# Once _pkg(lsb-release) installed ansible setup module can tell
+# codename (ie. _val(squeeze))
+#
+# But this must run once first early because
+#
+# _code(ansible group_by ansible_lsb.codename)
+#
+# depends on _pkg(lsb-release) being installed.
+
+- name: Install lsb-release
+  apt: { name: lsb-release }

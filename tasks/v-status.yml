@@ -1,0 +1,21 @@
+---
+
+- name: Get VM status
+
+  delegate_to: pysphere
+  register: status_
+  always_run: True
+  when: (clone_ is defined and not clone_|skipped) or clone_ is not defined
+
+  vsphere_status:
+    vcenter_hostname: "{{ vcenter }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    guest: "{{ vm_name }}"
+
+- name: Set VM status fact
+
+  always_run: True
+  when: not status_|skipped
+
+  set_fact: { vm_status: "{{ status_.status }}" }

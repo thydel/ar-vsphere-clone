@@ -1,0 +1,32 @@
+---
+
+- name: Change VM hostname common parts
+
+  when:
+    vm_status == 'POWERED ON'
+    and ansible_hostname == template_hostname
+
+  args:
+    executable: /bin/bash
+
+  shell:
+    echo {{ vm_hostname }} > /etc/hostname;
+    echo -e $'/{{ template_hostname }}/s//{{ vm_hostname }}/g\nwq' | ed /etc/hosts
+
+- name: Change VM hostname wheezy way
+
+  when:
+    vm_status == 'POWERED ON'
+    and ansible_hostname == template_hostname
+    and ansible_distribution_release == 'wheezy'
+
+  command: invoke-rc.d hostname.sh start
+
+- name: Change VM hostname jessie way
+
+  when:
+    vm_status == 'POWERED ON'
+    and ansible_hostname == template_hostname
+    and ansible_distribution_release == 'jessie'
+
+  command: hostnamectl set-hostname {{ vm_hostname }}

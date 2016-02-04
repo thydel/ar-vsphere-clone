@@ -1,0 +1,42 @@
+---
+
+- name: Set running condition
+
+  set_fact:
+    do_dhcpd: |
+      {{ not clone_|skipped or force_dhcpd is defined }}
+
+- name: Add host to dhcpd conf
+
+  when: do_dhcpd
+  notify: restart dhcpd
+  delegate_to: dhcpd
+
+  augeas:
+    command: set
+    path: '/files/etc/dhcp/dhcpd.conf/host[.="{{ vm_hostname }}"]'
+    value: "{{ vm_hostname }}"
+
+- name: Set fixed-address of host
+
+  when: do_dhcpd
+  notify: restart dhcpd
+  delegate_to: dhcpd
+
+  augeas:
+    command: set
+    path: '/files/etc/dhcp/dhcpd.conf/host[.="{{ vm_hostname }}"]/fixed-address'
+    value: "{{ vm_hostname }}.{{ network_name }}"
+
+- name: Set hardware address of host
+
+  when: do_dhcpd
+  notify: restart dhcpd
+  delegate_to: dhcpd
+
+  augeas:
+    commands: |
+      set /files/etc/dhcp/dhcpd.conf/host[.=\"{{ vm_hostname }}\"]/hardware/type ethernet
+      set /files/etc/dhcp/dhcpd.conf/host[.=\"{{ vm_hostname }}\"]/hardware/address "{{ vm_.ansible_facts.hw_eth0.macaddress }}"
+
+- meta: flush_handlers

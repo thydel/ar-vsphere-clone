@@ -1,0 +1,29 @@
+---
+
+# vm_extra_config doesn't works for reconfigured
+# use our own vsphere_extraconfig module instead
+# still use it for memory and cpu
+
+- name: reconfigure VM
+
+  delegate_to: pysphere
+  register: reconfigured_
+  when: not clone_|skipped
+
+  vsphere_guest:
+    vcenter_hostname: "{{ vcenter }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    guest: "{{ vm_name }}"
+    state: reconfigured
+
+    vm_hardware:
+      memory_mb: "{{ vm_memory_mb }}"
+      num_cpus: "{{ vm_num_cpus }}"
+
+    esxi:
+      datacenter: "{{ datacenter }}"
+      hostname: "{{ esxi_host }}"
+
+- debug: { var: reconfigured_ }
+  when: debug is defined and not clone_|skipped

@@ -1,0 +1,13 @@
+---
+
+- name: Restart VM
+
+  delegate_to: pysphere
+  register: restart_
+
+  vsphere_guest:
+    vcenter_hostname: "{{ vcenter }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    guest: "{{ vm_name }}"
+    state: restarted

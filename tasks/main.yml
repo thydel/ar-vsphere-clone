@@ -1,0 +1,24 @@
+---
+
+- { include:  v-clone.yml,          tags: [ clone,       preboot ]}
+- { include:  v-shutdown.yml,       tags: [ shutdown,    preboot ]}
+- { include:  v-extraconfig.yml,    tags: [ extraconfig, preboot ]}
+- { include:  v-reconfigure.yml,    tags: [ reconfigure, preboot ]}
+- { include:  v-facts.yml,          tags: [ vfacts,      preboot ]}
+- { include:  dhcpd.yml,            tags: [ dhcpd,       preboot ]}
+- { include:  v-boot.yml,           tags: [ rename,      boot ]}
+- { include:  v-status.yml,         tags: [ rename,      status,change-hostname,host-keys-renew,rename-vgroup ]}
+- { include:  wait-for-boot.yml,    tags: [ rename,      host-keys ]}
+- { include:  host-keys-forget.yml, tags: [ rename,      host-keys], when: rescan is defined }
+- { include:  host-keys-scan.yml,   tags: [ rename,      host-keys ]}
+- { include:  facts.yml,            tags: [ rename,      facts,change-hostname,rename-vgroup ]}
+- { include:  tools.yml,            tags: [ rename,      tools,change-hostname,rename-vgroup ]}
+- { include:  change-hostname.yml,  tags: [ rename,      change-hostname ]}
+- { include:  host-keys-renew.yml,  tags: [ rename,      host-keys-renew ]}
+- { include:  host-keys-scan.yml,   tags: [ rename,      host-keys-renew ]}
+- { include:  rename-vgroup.yml,    tags: [ rename,      rename-vgroup ]}
+
+# use rescan to clear known_hosts of previous iteration when in debug
+# loop mode
+#
+# ansible-playbook clone.yml clone.yml -t host-keys -e 'rescan=t'

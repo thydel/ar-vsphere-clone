@@ -1,0 +1,38 @@
+---
+
+- name: Set running condition
+
+  set_fact:
+    do_keys_renew: |
+      {{ vm_status == 'POWERED ON' and ssh_host_pub_keys_ is defined and ssh_host_pub_keys_.rc == 0 }}
+
+- name: Look for host key name
+
+  when: vm_status == 'POWERED ON'
+  register: ssh_host_pub_keys_
+  changed_when: False
+  failed_when: ssh_host_pub_keys_.rc >= 2
+
+  command: grep -q {{ template_hostname }} /etc/ssh/ssh_host_dsa_key.pub
+
+- name: Remove old keys
+
+  when: do_keys_renew
+
+  shell: rm /etc/ssh/ssh_host_*
+
+- name: Regenerate OpenSSH Host Keys
+
+  when: do_keys_renew
+  notify: restart sshd
+
+  command: dpkg-reconfigure openssh-server
+
+- name: Forget previouly known keys for this host
+
+  when: do_keys_renew
+  delegate_to: localhost
+
+  command: ssh-keygen -R {{ vm_hostname }}.oxa
+
+- meta: flush_handlers

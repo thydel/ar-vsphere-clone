@@ -1,0 +1,18 @@
+---
+
+- name: Allow virtual disk to have uniq ID
+
+  delegate_to: pysphere
+  when: not clone_|skipped
+
+  vsphere_extraconfig:
+
+    vcenter_hostname: "{{ vcenter }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    guest: "{{ vm_name }}"
+
+    vm_extra_config:
+      disk.locking : "false"
+      disk.EnableUUID: "true"
+      # notes: "{{ vm_notes }}"

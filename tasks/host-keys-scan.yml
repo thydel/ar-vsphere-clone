@@ -1,0 +1,47 @@
+---
+
+- name: See if we know this host key
+
+  changed_when: False
+  always_run: True
+  register: keygenf_
+  delegate_to: localhost
+
+  command: ssh-keygen -F {{ vm_hostname }}.oxa
+  
+- name: Clear addrlist namelist pair
+
+  delegate_to: bastion
+  when: keygenf_.stdout == ""
+
+  file:
+    path: /tmp/4keyscan
+    state: absent
+
+- name: Generate addrlist namelist pair
+
+  delegate_to: bastion
+  when: keygenf_.stdout == ""
+
+  lineinfile:
+    dest: /tmp/4keyscan
+    line: "{{ vm_hostname }}.{{ network_name }} {{ vm_hostname}}.oxa"
+    create: True
+  
+- name: Register ssh host key
+
+  register: ssh_host_key
+  delegate_to: bastion
+  when: keygenf_.stdout == ""
+
+  command: ssh-keyscan -H -f /tmp/4keyscan
+
+- name: Store ssh host key
+
+  delegate_to: localhost
+  when: keygenf_.stdout == ""
+
+  lineinfile:
+    dest: ~/.ssh/known_hosts
+    line: "{{ ssh_host_key.stdout }}"
+    insertafter: EOF

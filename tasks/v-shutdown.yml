@@ -1,0 +1,14 @@
+---
+
+- name: power off VM
+
+  when: clone_.changed or shutdown|default(False)
+  register: shutdown_
+  delegate_to: pysphere
+
+  vsphere_guest:
+    vcenter_hostname: "{{ vcenter }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    guest: "{{ vm_name }}"
+    state: powered_off

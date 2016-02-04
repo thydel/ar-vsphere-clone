@@ -1,0 +1,22 @@
+---
+
+- name: Rename virtual group
+
+  register: vgrename_
+  when: ansible_cmdline.root == '/dev/mapper/{{ template_hostname }}--vg-root'
+
+  shell:
+    vgrename {{ template_hostname }}-vg {{ vm_hostname }};
+    echo -e 'g/{{ template_hostname }}--vg/s//{{ vm_hostname }}/\nwq' | ed /etc/fstab;
+    update-grub;
+    echo -e '/{{ template_hostname }}--vg/s//{{ vm_hostname }}/\nwq' | ed /etc/initramfs-tools/conf.d/resume;
+    update-initramfs -u -k all
+
+  args:
+    executable: /bin/bash
+
+- name: Restart after vgrename
+
+  when: not vgrename_|skipped and not no_restart|default(False)
+  
+  include: v-restart.yml

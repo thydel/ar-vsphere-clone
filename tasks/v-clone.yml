@@ -1,0 +1,16 @@
+---
+
+- name: Clone VM
+
+  register: clone_
+  delegate_to: pysphere
+
+  vsphere_guest:
+    vcenter_hostname: "{{ vcenter }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    guest: "{{ vm_name }}"
+    from_template: yes
+    template_src: "{{ template_name }}"
+    cluster: "{{ cluster }}"
+    resource_pool: "{{ resource_pool }}"
