@@ -34,7 +34,7 @@
   delegate_to: vbastion
   when: keygenf_.stdout == ""
 
-  command: ssh-keyscan -H -f /tmp/4keyscan
+  command: ssh-keyscan -t rsa,ecdsa -H -f /tmp/4keyscan
 
 - name: Store ssh host key
 
