@@ -6,6 +6,7 @@
   always_run: True
   register: keygenf_
   delegate_to: localhost
+  failed_when: keygenf_.stderr != ""
 
   command: ssh-keygen -F {{ vm_hostname }}.oxa
   

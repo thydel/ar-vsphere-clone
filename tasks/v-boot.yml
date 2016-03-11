@@ -6,6 +6,7 @@
   register: boot_
 
   vsphere_guest:
+    validate_certs: '{{ validate_certs }}'
     vcenter_hostname: "{{ vcenter }}"
     username: "{{ username }}"
     password: "{{ password }}"

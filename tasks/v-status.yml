@@ -8,6 +8,7 @@
   when: (clone_ is defined and not clone_|skipped) or clone_ is not defined
 
   vsphere_status:
+    validate_certs: '{{ validate_certs }}'
     vcenter_hostname: "{{ vcenter }}"
     username: "{{ username }}"
     password: "{{ password }}"
