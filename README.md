@@ -16,15 +16,15 @@ Create new github repos (see [gist-helper][gist-helper.mk] and
 [github-helper][github-helper.mk])
 
 ```bash
-github epi create/infra-clone
-github epi clone/infra-clone
+github epi create/ar-vsphere-clone
+github epi clone/ar-vsphere-clone
 ```
 
 Then use [hg2git.yml][hg2git.yml] to setup the *old* mercurial repos
 to use the *new* git repo via the [the Hg-Git mercurial plugin][hg-git]
 
 ```bash
-hg2git.yml -e hg=~/usr/old/clone -e git=~/usr/infra-clone -D
+hg2git.yml -e hg=~/usr/old/clone -e git=~/usr/ar-vsphere-clone -D
 ```
 
 And use *mercurial* a last time to transfert history to *git*
@@ -36,5 +36,5 @@ hg --cwd ~/usr/old/clone push git
 And use *git* from now on
 
 ```bash
-git -C ~/usr/infra-clone pull
+git -C ~/usr/ar-vsphere-clone pull
 ```
