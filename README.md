@@ -1,6 +1,6 @@
-# infra-clone
+# ar-vsphere-clone
 
-Clone a new node
+Ansible role to Clone a new VM via pysphere, then setup DHCPd and reconfigure VM id.
 
 [gist-helper.mk]: https://gist.github.com/thydel/524e88147a65f3bff526a86aa5227621 "gist"
 [init-play-dir.yml]: https://gist.github.com/thydel/f3cbc54b05ed5d6dbecb7e6f4c86a6cf "gist"
@@ -38,3 +38,8 @@ And use *git* from now on
 ```bash
 git -C ~/usr/ar-vsphere-clone pull
 ```
+
+## Look for how to specify gitub role dependencies
+
+[What is the correct syntax of defining role dependencies in the meta/main.yml in Ansible?](http://serverfault.com/questions/803079/what-is-the-correct-syntax-of-defining-role-dependencies-in-the-meta-main-yml-in "serverfault")
+

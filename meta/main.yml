@@ -2,4 +2,7 @@
 
 dependencies:
 
-  - src: pysphere
+  - name: pysphere
+    src: https://github.com/thyepi/amr-pysphere-misc.git
+    scm: git
+    version: master
