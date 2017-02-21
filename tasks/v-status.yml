@@ -6,6 +6,7 @@
   register: status_
   check_mode: False
   when: (clone_ is defined and not clone_|skipped) or clone_ is not defined
+  no_log: True
 
   vsphere_status:
     validate_certs: '{{ validate_certs }}'

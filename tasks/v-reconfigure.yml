@@ -9,6 +9,7 @@
   delegate_to: pysphere
   register: reconfigured_
   when: not clone_|skipped
+  no_log: True
 
   vsphere_guest:
     validate_certs: '{{ validate_certs }}'

@@ -5,6 +5,7 @@
   when: clone_.changed or shutdown|default(False)
   register: shutdown_
   delegate_to: pysphere
+  no_log: True
 
   vsphere_guest:
     validate_certs: '{{ validate_certs }}'

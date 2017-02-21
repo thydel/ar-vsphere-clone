@@ -4,6 +4,7 @@
 
   delegate_to: pysphere
   when: not clone_|skipped
+  no_log: True
 
   vsphere_extraconfig:
 
