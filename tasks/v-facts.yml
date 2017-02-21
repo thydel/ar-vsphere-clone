@@ -4,7 +4,7 @@
 
   when: not clone_|skipped
   register: vm_
-  always_run: True
+  check_mode: False
   delegate_to: pysphere
 
   vsphere_guest:

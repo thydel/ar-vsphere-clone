@@ -4,7 +4,7 @@
 
   delegate_to: pysphere
   register: status_
-  always_run: True
+  check_mode: False
   when: (clone_ is defined and not clone_|skipped) or clone_ is not defined
 
   vsphere_status:
@@ -16,7 +16,7 @@
 
 - name: Set VM status fact
 
-  always_run: True
+  check_mode: False
   when: not status_|skipped
 
   set_fact: { vm_status: "{{ status_.status }}" }

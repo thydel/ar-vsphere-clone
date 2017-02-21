@@ -3,7 +3,7 @@
 - name: See if we know this host key
 
   changed_when: False
-  always_run: True
+  check_mode: False
   register: keygenf_
   delegate_to: localhost
   failed_when: keygenf_.stderr != ""
