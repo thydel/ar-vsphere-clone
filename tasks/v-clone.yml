@@ -4,6 +4,7 @@
 
   register: clone_
   delegate_to: pysphere
+  no_log: True
 
   vsphere_guest:
     validate_certs: '{{ validate_certs }}'
