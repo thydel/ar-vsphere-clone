@@ -2,7 +2,7 @@
 
 - name: restart dhcpd
 
-  delegate_to: dhcpd
+  delegate_to: '{{ dhcpd }}'
 
   service:
     name: "{{ dhcpd_service }}"

@@ -10,7 +10,7 @@
 
   when: do_dhcpd
   notify: restart dhcpd
-  delegate_to: dhcpd
+  delegate_to: '{{ dhcpd }}'
 
   augeas:
     command: set
@@ -21,7 +21,7 @@
 
   when: do_dhcpd
   notify: restart dhcpd
-  delegate_to: dhcpd
+  delegate_to: '{{ dhcpd }}'
 
   augeas:
     command: set
@@ -32,7 +32,7 @@
 
   when: do_dhcpd
   notify: restart dhcpd
-  delegate_to: dhcpd
+  delegate_to: '{{ dhcpd }}'
 
   augeas:
     commands: |
