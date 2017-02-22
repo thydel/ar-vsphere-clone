@@ -5,7 +5,7 @@
 - name: Wait for ssh to appears
 
   when: boot_.changed
-  delegate_to: vbastion
+  delegate_to: '{{ bastion }}'
 
   wait_for:
     host: "{{ vm_hostname }}.{{ network_name }}"

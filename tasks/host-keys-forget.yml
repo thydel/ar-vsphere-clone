@@ -8,6 +8,6 @@
 
 - name: Forget previouly known keys for this host on bastion too
 
-  delegate_to: vbastion
+  delegate_to: '{{ bastion }}'
 
   command: ssh-keygen -R {{ vm_hostname }}.{{ network_name }}
