@@ -5,7 +5,7 @@
 - { include:  v-extraconfig.yml,    tags: [ extraconfig, preboot ]}
 - { include:  v-reconfigure.yml,    tags: [ reconfigure, preboot ]}
 - { include:  v-facts.yml,          tags: [ vfacts,      preboot ]}
-- { include:  dhcpd.yml,            tags: [ dhcpd,       preboot ]}
+- { include:  dhcpd.yml, become: True, tags: [ dhcpd,    preboot ]}
 - { include:  v-boot.yml,           tags: [ rename,      boot ]}
 - { include:  v-status.yml,         tags: [ rename,      status,change-hostname,host-keys-renew,rename-vgroup ]}
 - { include:  wait-for-boot.yml,    tags: [ rename,      host-keys ]}
