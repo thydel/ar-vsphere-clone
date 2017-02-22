@@ -2,7 +2,7 @@
 
 - name: Get VM status
 
-  delegate_to: pysphere
+  delegate_to: '{{ pysphere }}'
   register: status_
   check_mode: False
   when: (clone_ is defined and not clone_|skipped) or clone_ is not defined

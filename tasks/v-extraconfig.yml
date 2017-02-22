@@ -2,7 +2,7 @@
 
 - name: Allow virtual disk to have uniq ID
 
-  delegate_to: pysphere
+  delegate_to: '{{ pysphere }}'
   when: not clone_|skipped
   no_log: True
 

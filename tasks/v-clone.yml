@@ -3,7 +3,7 @@
 - name: Clone VM
 
   register: clone_
-  delegate_to: pysphere
+  delegate_to: '{{ pysphere }}'
   no_log: True
 
   vsphere_guest:

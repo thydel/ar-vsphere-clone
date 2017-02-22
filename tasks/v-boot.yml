@@ -2,7 +2,7 @@
 
 - name: Power on VM
 
-  delegate_to: pysphere
+  delegate_to: '{{ pysphere }}'
   register: boot_
   no_log: True
 

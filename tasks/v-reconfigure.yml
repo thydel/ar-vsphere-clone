@@ -6,7 +6,7 @@
 
 - name: reconfigure VM
 
-  delegate_to: pysphere
+  delegate_to: '{{ pysphere }}'
   register: reconfigured_
   when: not clone_|skipped
   no_log: True

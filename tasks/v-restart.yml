@@ -2,7 +2,7 @@
 
 - name: Restart VM
 
-  delegate_to: pysphere
+  delegate_to: '{{ pysphere }}'
   register: restart_
   no_log: True
 
