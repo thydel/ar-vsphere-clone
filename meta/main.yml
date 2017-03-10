@@ -6,3 +6,7 @@ dependencies:
     src: https://github.com/thyepi/amr-pysphere-misc.git
     scm: git
     version: master
+
+  - src: paluh.augeas
+    name: augeas
+    version: master
