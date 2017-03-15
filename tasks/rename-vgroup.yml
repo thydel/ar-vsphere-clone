@@ -3,7 +3,7 @@
 - name: Rename virtual group
 
   register: vgrename_
-  when: ansible_cmdline.root == '/dev/mapper/{{ template_hostname }}--vg-root'
+  when: ansible_cmdline.root == '/dev/mapper/' ~ template_hostname ~ '--vg-root'
 
   shell:
     vgrename {{ template_hostname }}-vg {{ vm_hostname }};
