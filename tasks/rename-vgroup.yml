@@ -17,6 +17,6 @@
 
 - name: Restart after vgrename
 
-  when: not vgrename_|skipped and not no_restart|default(False)
+  when: not vgrename_ is skipped and not no_restart|default(False)
   
   include: v-restart.yml

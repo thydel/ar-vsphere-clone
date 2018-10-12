@@ -3,7 +3,7 @@
 - name: Allow virtual disk to have uniq ID
 
   delegate_to: '{{ pysphere }}'
-  when: not clone_|skipped
+  when: not clone_ is skipped
   no_log: True
 
   vsphere_extraconfig:

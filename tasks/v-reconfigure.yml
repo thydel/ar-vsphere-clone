@@ -8,7 +8,7 @@
 
   delegate_to: '{{ pysphere }}'
   register: reconfigured_
-  when: not clone_|skipped
+  when: not clone_ is skipped
   no_log: True
 
   vsphere_guest:
@@ -28,4 +28,4 @@
       hostname: "{{ esxi_host }}"
 
 - debug: { var: reconfigured_ }
-  when: debug is defined and not clone_|skipped
+  when: debug is defined and not clone_ is skipped

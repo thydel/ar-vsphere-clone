@@ -2,7 +2,7 @@
 
 - name: Register VM facts
 
-  when: not clone_|skipped
+  when: not clone_ is skipped
   register: vm_
   check_mode: False
   delegate_to: '{{ pysphere }}'
@@ -17,4 +17,4 @@
     vmware_guest_facts: yes
 
 - debug: { var: vm_ }
-  when: debug is defined and not clone_|skipped
+  when: debug is defined and not clone_ is skipped

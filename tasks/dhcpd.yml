@@ -4,7 +4,7 @@
 
   set_fact:
     do_dhcpd: |
-      {{ not clone_|skipped or force_dhcpd is defined }}
+      {{ not clone_ is skipped or force_dhcpd is defined }}
 
 - name: Add host to dhcpd conf
 
