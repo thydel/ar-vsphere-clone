@@ -27,6 +27,6 @@
   when:
     vm_status == 'POWERED ON'
     and ansible_hostname == template_hostname
-    and ansible_distribution_release == 'jessie'
+    and (ansible_distribution_release == 'jessie' or ansible_distribution_release == 'stretch')
 
   command: hostnamectl set-hostname {{ vm_hostname }}

@@ -5,11 +5,26 @@
   register: vgrename_
   when: ansible_cmdline.root == '/dev/mapper/' ~ template_hostname ~ '--vg-root'
 
-  shell:
+  shell: 
     vgrename {{ template_hostname }}-vg {{ vm_hostname }};
     echo -e 'g/{{ template_hostname }}--vg/s//{{ vm_hostname }}/\nwq' | ed /etc/fstab;
     update-grub;
     echo -e '/{{ template_hostname }}--vg/s//{{ vm_hostname }}/\nwq' | ed /etc/initramfs-tools/conf.d/resume;
+    update-initramfs -u -k all
+
+  args:
+    executable: /bin/bash
+
+- name: Rename virtual group
+
+  register: vgrename_
+  when: ansible_cmdline.root == '/dev/mapper/' ~ 'debian8' ~ '--vg-root'
+
+  shell: &shell
+    vgrename debian8-vg {{ vm_hostname }};
+    echo -e 'g/debian8--vg/s//{{ vm_hostname }}/\nwq' | ed /etc/fstab;
+    update-grub;
+    echo -e '/debian8--vg/s//{{ vm_hostname }}/\nwq' | ed /etc/initramfs-tools/conf.d/resume;
     update-initramfs -u -k all
 
   args:
