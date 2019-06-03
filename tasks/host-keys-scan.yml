@@ -12,7 +12,7 @@
   
 - name: Clear addrlist namelist pair
 
-  delegate_to: '{{ bastion }}'
+  delegate_to: '{{ hostvars[bastion].ansible_host }}'
   when: keygenf_.stdout == ""
 
   file:
@@ -21,7 +21,7 @@
 
 - name: Generate addrlist namelist pair
 
-  delegate_to: '{{ bastion }}'
+  delegate_to: '{{ hostvars[bastion].ansible_host }}'
   when: keygenf_.stdout == ""
 
   lineinfile:
@@ -32,7 +32,7 @@
 - name: Register ssh host key
 
   register: ssh_host_key
-  delegate_to: '{{ bastion }}'
+  delegate_to: '{{ hostvars[bastion].ansible_host }}'
   when: keygenf_.stdout == ""
 
   command: ssh-keyscan -t rsa,ecdsa -H -f /tmp/4keyscan

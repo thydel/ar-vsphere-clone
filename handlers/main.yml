@@ -2,7 +2,8 @@
 
 - name: restart dhcpd
 
-  delegate_to: '{{ dhcpd }}'
+  delegate_to: '{{ hostvars[dhcpd].ansible_host }}'
+  vars: { ansible_become_pass: '{{ hostvars[dhcpd].ansible_become_pass }}' }
   # https://github.com/ansible/ansible/issues/17490
   become: True
 

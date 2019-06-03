@@ -16,5 +16,5 @@
 
     vm_extra_config:
       disk.locking : "false"
-      disk.EnableUUID: "true"
+      disk.EnableUUID: "TRUE"
       # notes: "{{ vm_notes }}"

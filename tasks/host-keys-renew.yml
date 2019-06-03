@@ -17,20 +17,20 @@
 
 - name: Remove old keys
 
-  when: do_keys_renew
+  when: do_keys_renew | bool
 
   shell: rm /etc/ssh/ssh_host_*
 
 - name: Regenerate OpenSSH Host Keys
 
-  when: do_keys_renew
+  when: do_keys_renew | bool
   notify: restart sshd
 
   command: dpkg-reconfigure openssh-server
 
 - name: Forget previouly known keys for this host
 
-  when: do_keys_renew
+  when: do_keys_renew | bool
   delegate_to: localhost
 
   command: ssh-keygen -R {{ vm_hostname }}.oxa
