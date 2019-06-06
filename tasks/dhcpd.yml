@@ -3,8 +3,7 @@
 - name: Set running condition
 
   set_fact:
-    do_dhcpd: |
-      {{ not clone_ is skipped or force_dhcpd is defined }}
+    do_dhcpd: '{{ not clone_ is skipped or force_dhcpd is defined }}'
 
 - name: Add host to dhcpd conf
 
