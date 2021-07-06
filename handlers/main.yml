@@ -1,6 +1,7 @@
 ---
 
 - name: restart dhcpd
+  when: restart_dhcpd is defined
 
   delegate_to: '{{ hostvars[dhcpd].ansible_host }}'
   vars: { ansible_become_pass: '{{ hostvars[dhcpd].ansible_become_pass }}' }
