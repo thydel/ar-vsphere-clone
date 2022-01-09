@@ -5,7 +5,7 @@
 - { include:  v-extraconfig.yml,    tags: [ extraconfig, preboot ]}
 - { include:  v-reconfigure.yml,    tags: [ reconfigure, preboot ]}
 - { include:  v-facts.yml,          tags: [ vfacts,      preboot ]}
-- include:    dhcpd.yml
+- include:    dhcpd2.yml
   tags:                                   [ dhcpd,       preboot ]
   become: True
 - { include:  v-boot.yml,           tags: [ rename,      boot ]}
@@ -16,9 +16,9 @@
   when: rescan is defined
 - { include:  host-keys-scan.yml,   tags: [ rename,      host-keys ]}
 - { include:  facts.yml,            tags: [ rename,      facts,change-hostname,rename-vgroup ]}
-- include:    tools.yml
-  tags:                                   [ rename,      tools,change-hostname,rename-vgroup ]
-  become: True
+#- include:    tools.yml
+#  tags:                                   [ rename,      tools,change-hostname,rename-vgroup ]
+#  become: True
 - include:    change-hostname.yml
   tags:                                   [ rename,      change-hostname ]
   become: True
