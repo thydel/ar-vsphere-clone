@@ -14,6 +14,7 @@
     ansible_become_pass: '{{ hostvars[dhcpd].ansible_become_pass }}'
   blockinfile:
     path: /etc/dhcp/dhcpd.conf
+    marker: '# {mark} ANSIBLE MANAGED BLOCK {{ vm_hostname }}'
     block: |
       host {{ vm_hostname }} {
       fixed-address {{ vm_hostname }}.{{ network_name }};
