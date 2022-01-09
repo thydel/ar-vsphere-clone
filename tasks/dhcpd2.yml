@@ -1,0 +1,23 @@
+---
+
+- name: Set running condition
+
+  set_fact:
+    do_dhcpd: '{{ not clone_ is skipped or force_dhcpd is defined }}'
+
+- name: Add dhcpd conf
+
+  when: do_dhcpd | bool
+  notify: restart dhcpd
+  delegate_to: '{{ hostvars[dhcpd].ansible_host }}'
+  vars:
+    ansible_become_pass: '{{ hostvars[dhcpd].ansible_become_pass }}'
+  blockinfile:
+    path: /etc/dhcp/dhcpd.conf
+    block: |
+      host {{ vm_hostname }} {
+      fixed-address {{ vm_hostname }}.{{ network_name }};
+      hardware ethernet {{ vm_.ansible_facts.hw_eth0.macaddress }};
+      }
+
+- meta: flush_handlers
